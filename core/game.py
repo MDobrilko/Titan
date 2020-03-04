@@ -7,7 +7,7 @@ from core.components.entity import Entity
 class Game:
     def __init__(self):
         pg.init()
-        self.win = pg.display.set_mode((1000, 500))
+        self.win = pg.display.set_mode((1000, 1000))
 
         pg.display.set_caption('Cubes Game')
 

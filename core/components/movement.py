@@ -17,17 +17,17 @@ class Movement:
         return True
 
     def moveUp(self):
-        print('w')
         self.entity.y -= self.vel
+        print(self.entity.x, self.entity.y)
     
     def moveRight(self):
-        print('d')
         self.entity.x += self.vel
+        print(self.entity.x, self.entity.y)
     
     def moveLeft(self):
-        print('a')
         self.entity.x -= self.vel
+        print(self.entity.x, self.entity.y)
     
     def moveDown(self):
-        print('s')
         self.entity.y += self.vel
+        print(self.entity.x, self.entity.y)

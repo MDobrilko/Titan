@@ -1,3 +1,5 @@
+import pygame as pg
+
 from core.containers.player import Player
 from core.components.entity import Entity
 
@@ -12,7 +14,7 @@ class ScneneController:
     
     def startScene(self, scene : str):
         if not scene in self.scenes:
-            raise Exception("Сцены {scene} не существует")
+            raise Exception("Сцены {} не существует".format(scene))
         
         self.game.inputController.clearSubs()
         self.scenes[scene]()
@@ -23,4 +25,5 @@ class ScneneController:
     
     def render(self):
         self.game.win.fill((0, 0, 0))
+        self.game.win.blit(pg.image.load('D:/Programmes/bin/python/Titan/Titan/assets/textures/furniture/Room estructure.png'), (0, 0))
         self.player.render()
