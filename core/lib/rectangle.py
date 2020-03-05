@@ -46,7 +46,7 @@ class Rectangle:
         if other is None:
             return False
 
-        return (self.getMaxX() > other.minX() and 
+        return (self.getMaxX() > other.getMinX() and 
             self.getMinX() < other.getMaxX() and 
             self.getMaxY() > other.getMinY() and 
             self.getMinY() < other.getMaxY())

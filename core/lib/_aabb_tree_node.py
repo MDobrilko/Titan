@@ -2,13 +2,18 @@ from core.lib.point     import *
 from core.lib.rectangle import *
 
 class AABB_TreeNode:
-    def __init__(self, rect=None, other=None):
+    def __init__(self, rectObj=None, other=None):
         if not other is None:
+            self.__rectObj = other.__rectObj
             self.__rect = other.__rect
             self.__leftNode = other.__leftNode
             self.__rightNode = other.__rightNode
+        elif not rectObj is None:
+            self.__rectObj = rectObj
+            self.setLeaf(rectObj.getRect())
         else:
-            self.setLeaf(rect)
+            self.__rectObj = None
+            self.setLeaf(rectObj)
 
     
     def __eq__(self, value):
@@ -39,6 +44,10 @@ class AABB_TreeNode:
 
     def getRect(self):
         return self.__rect
+
+    
+    def getRectObj(self):
+        return self.__rectObj
     
 
     def setLeaf(self, rect):
@@ -62,5 +71,5 @@ class AABB_TreeNode:
                 return self.getLeftNode()
     
 
-    def isCrossingRect(self, rect):
-        return self.__rect.isCrossing(rect)
+    def isCrossing(self, rectObj):
+        return self.__rect.isCrossing(rectObj.getRect())
