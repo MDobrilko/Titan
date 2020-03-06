@@ -10,7 +10,7 @@ class AABB_Tree:
             self.root = AABB_TreeNode(rectObj)
             return
 
-        newLeaf = AABB_TreeNode(rectObj)
+        newLeaf = AABB_TreeNode(rectObj=rectObj)
         curNode = self.root
         parentNode = None
 
@@ -36,7 +36,9 @@ class AABB_Tree:
             leftNode=newLeaf,
             rightNode=curNode)
         
-        if not parentNode is None:
+        if curNode is self.root:
+            self.root = newBranch
+        elif not parentNode is None:
             if curNode is parentNode.getLeftNode():
                 parentNode.setBranch(newBranch, parentNode.getRightNode())
             else:
@@ -67,22 +69,20 @@ class AABB_Tree:
         if self.root is None:
             return
         
-        stack = [self.root]
+        stack = [(None, None, self.root)]
 
         curNode = None
         parentNode = None
         greatParentNode = None
 
         while stack:
-            greatParentNode = parentNode
-            parentNode = curNode
-            curNode = stack.pop()
+            greatParentNode, parentNode, curNode = stack.pop()
 
             if curNode.isCrossing(rectObj):
                 if curNode.isBranch():
-                    stack.append(curNode.getLeftNode())
-                    stack.append(curNode.getRightNode())
-                elif curNode.isLeaf() and curNode.getRect() == rectObj.getRect():
+                    stack.append((parentNode, curNode, curNode.getLeftNode()))
+                    stack.append((parentNode, curNode, curNode.getRightNode()))
+                elif curNode.getRectObj() is rectObj:
                     self.__eraseNode(greatParentNode, parentNode, curNode)
     
 

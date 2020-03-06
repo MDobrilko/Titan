@@ -13,7 +13,7 @@ class AABB_TreeNode:
             self.setLeaf(rectObj.getRect())
         else:
             self.__rectObj = None
-            self.setLeaf(rectObj)
+            self.setLeaf(Rectangle(Point(), Point()))
 
     
     def __eq__(self, value):
