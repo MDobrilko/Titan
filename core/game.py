@@ -1,6 +1,7 @@
 import pygame as pg
-from core.controllers.input_controller import InputController
+from core.controllers.input_controller  import InputController
 from core.controllers.scenes_controller import ScneneController
+from core.controllers.entity_controller import EntityController
 from core.containers.player import Player
 from core.components.entity import Entity
 
@@ -12,7 +13,9 @@ class Game:
         pg.display.set_caption('Cubes Game')
 
         self.inputController = InputController()
+        self.entityController = EntityController(self)
         self.scenesController = ScneneController(self)
+        
     
     def start(self):
         self.gameRun = True
